@@ -18,11 +18,10 @@ namespace RenamerTest
         public string pbixFile = "test_files/Sales.pbix";
         public string zipFile = "test_files/Sales.zip";
         private readonly PbiFile _pbiFile;
-        private JObject _jObject;
 
         public PBIFileTest()
         {
-            _pbiFile = new PbiFile();
+            _pbiFile = new PbiFile(pbixFile);
         }
 
 
@@ -30,7 +29,11 @@ namespace RenamerTest
         [TestMethod]
         public void TestRenamePBIFile()
         {
-            File.Delete(zipFile);
+            if (File.Exists(zipFile))
+            {
+                File.Delete(zipFile);
+            }
+            
 
             Debug.WriteLine(this.pbixFile);
             var new_file_path = _pbiFile.RenamePbiFolder(this.pbixFile);
@@ -41,16 +44,14 @@ namespace RenamerTest
         public void TestConvertToJson()
         {
             var Json = _pbiFile.GetLayoutAsJson(zipFile);
-            Debug.WriteLine(JObject.Parse(JsonConvert.SerializeObject(Json)));
-            
+            Debug.Write(Json);
 
         }
 
         [TestMethod]
         public void TestSave()
         {
-            var Json = _pbiFile.GetLayoutAsJson(zipFile);
-            _pbiFile.Save(zipFile,Json);
+            _pbiFile.Save();
         }
     }
     

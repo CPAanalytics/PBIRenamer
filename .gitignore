@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/PBIRenamer/PBIRenamer.csproj.bak
+/PBIRenamer/PBIRenamer.csproj.DotSettings
